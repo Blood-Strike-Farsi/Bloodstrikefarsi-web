@@ -48,7 +48,7 @@ git clone https://github.com/Blood-Strike-Farsi/bloodstrikefarsi-web.git
 
 ## کپی‌رایت
 
-&copy; 2025 bloodstrikefarsi-web. All rights reserved.
+&copy; 2023 bloodstrikefarsi-web. All rights reserved.
 
 طراحی و توسعه: تیم bloodstrikefarsi-web  
 ارتباط با ادمین: [@BloodStrikeFarsi](https://t.me/BloodStrikeFarsi)
