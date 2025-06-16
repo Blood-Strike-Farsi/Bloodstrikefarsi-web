@@ -1,108 +1,278 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>Attachments | bloodstrikefarsi</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>اتچمنت ها - bloodstrikefarsi-web</title>
+  <link rel="icon" type="image/x-icon" href="../images/BSicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../navbar.css">
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
     body {
+      font-family: 'Vazirmatn', 'Inter', sans-serif;
+      background-image: url('../images/AttachmentBG.webp');
+      background-size: cover;
+      background-position: center;
+      color: #00ffcc;
       min-height: 100vh;
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-      font-family: Tahoma, 'Vazirmatn', sans-serif;
-      background: linear-gradient(135deg,#f5f6fa 0%,#e2eafc 100%);
-      display: flex;
-      flex-direction: column;
     }
-    .container {
-      width: 100vw;
-      min-height: 100vh;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
+    .accordion-section {
+      background: rgba(25,30,35,0.85);
+      border-radius: 16px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 16px 0 rgba(56,189,248,0.10);
+      border: 2px solid #38bdf8;
+      overflow: hidden;
     }
-    .logo { display: block; margin: 2.2rem auto 1.5rem auto; width: 140px; border-radius: 16px; }
-    h1 { color: #c22c2c; text-align:center; font-size:2em; margin-bottom:1.3em;}
-    .tabs { display: flex; flex-wrap:wrap; gap: 10px; justify-content:center; margin-bottom:2em;}
-    .tab-btn {
-      background: #f2f2f2;
-      color: #222;
-      border: none;
-      border-radius: 8px 8px 0 0;
-      padding: 0.7em 1.5em;
-      font-size: 1.08em;
+    .accordion-title {
       cursor: pointer;
-      font-weight:bold;
-      transition: background .18s, color .18s;
-      box-shadow: 0 2px 8px #0001;
-    }
-    .tab-btn.active, .tab-btn:focus {
-      background: #c22c2c;
+      padding: 1rem 2rem;
+      font-size: 1.4rem;
+      background: linear-gradient(90deg,#0ea5e9,#38bdf8);
       color: #fff;
-      outline:none;
+      font-weight: bold;
+      transition: background 0.3s;
+      border: none;
+      outline: none;
+      width: 100%;
+      text-align: right;
     }
-    .tab-content { display: none; text-align:center; min-height:180px;}
-    .tab-content.active { display: block; }
-    .back-btn {display:block; color:#fff; background:#1b75cf; padding:.7em 0; margin:2.2em 0 0 0;border-radius:8px;text-align:center;font-weight:bold;text-decoration:none; width:180px;}
+    .accordion-title:hover {
+      background: linear-gradient(90deg,#38bdf8,#0ea5e9);
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      background: rgba(20,22,24,0.86);
+      transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
+      padding: 0 2rem;
+    }
+    .accordion-section.open .accordion-content {
+      padding: 1rem 2rem 2rem 2rem;
+      max-height: 1200px;
+      transition: max-height 0.7s cubic-bezier(0.4,0,0.2,1);
+    }
+    .guns-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+    .gun-card {
+      background: rgba(34,40,49,0.90);
+      border-radius: 12px;
+      padding: 0.7rem;
+      text-align: center;
+      box-shadow: 0 4px 25px 0 rgba(30,200,130,0.15);
+      border: 1.5px solid #38bdf8;
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+    .gun-card:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 32px 0 rgba(56,189,248,0.22);
+      border-color: #a6e416;
+    }
+    .gun-card img {
+      max-width: 100px;
+      max-height: 90px;
+      border-radius: 8px;
+      margin-bottom: 0.4rem;
+      background: #222;
+    }
+    .gun-card span {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #4FC3F7;
+    }
     @media (max-width: 700px) {
-      .container {padding:0;}
-      .logo {width:85px;}
-      .tabs{gap:3px;}
-      .tab-btn{padding:.5em .9em;}
+      .accordion-title { font-size: 1.1rem; padding: 0.8rem 1rem;}
+      .accordion-content { padding: 0 1rem;}
+      .accordion-section.open .accordion-content { padding: 0.7rem 1rem 1.2rem 1rem;}
+      .guns-grid { gap: 0.7rem;}
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="logo.png" class="logo" alt="لوگو bloodstrikefarsi">
-    <h1>Attachments | bloodstrikefarsi</h1>
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="assault">Assault Rifles</button>
-      <button class="tab-btn" data-tab="sniper">Snipers</button>
-      <button class="tab-btn" data-tab="shotgun">Shotguns</button>
-      <button class="tab-btn" data-tab="smg">SMGs</button>
-      <button class="tab-btn" data-tab="pistol">Pistols</button>
-      <button class="tab-btn" data-tab="special">Specials</button>
+  <!-- Navbar -->
+  <div class="navbar" style="direction: rtl;">
+    <span class="menu-toggle" id="menuToggle">☰</span>
+    <div class="menu" id="menu">
+      <a href="../index.html">خانه</a>
+      <a href="../Attachments/index.html">اتچمنت‌ها</a>
+      <a href="../BetterPing/index.html">رفع تحریم‌ها</a>
+      <a href="../Tutorials/index.html">کل آموزش ها</a>
     </div>
-    <div class="tab-content active" id="assault">
-      <!-- عکس‌ها و اتچمنت‌های Assault Rifles اینجا قرار می‌گیرند -->
-    </div>
-    <div class="tab-content" id="sniper">
-      <!-- عکس‌ها و اتچمنت‌های Snipers اینجا قرار می‌گیرند -->
-    </div>
-    <div class="tab-content" id="shotgun">
-      <!-- عکس‌ها و اتچمنت‌های Shotguns اینجا قرار می‌گیرند -->
-    </div>
-    <div class="tab-content" id="smg">
-      <!-- عکس‌ها و اتچمنت‌های SMGs اینجا قرار می‌گیرند -->
-    </div>
-    <div class="tab-content" id="pistol">
-      <!-- عکس‌ها و اتچمنت‌های Pistols اینجا قرار می‌گیرند -->
-    </div>
-    <div class="tab-content" id="special">
-      <!-- عکس‌ها و اتچمنت‌های Specials اینجا قرار می‌گیرند -->
-    </div>
-
-    <a class="back-btn" href="index.html">بازگشت به صفحه اصلی</a>
   </div>
+
+  <div class="container mx-auto px-2 py-8" style="margin-top:70px;max-width:920px;">
+    <h2 class="text-3xl text-center font-bold mb-7 text-yellow-300">اتچمنت گان‌های بازی BloodStrike</h2>
+    <!-- Accordion Section -->
+    <div class="accordion">
+
+      <!-- Rifles -->
+      <div class="accordion-section">
+        <button class="accordion-title">Rifles</button>
+        <div class="accordion-content">
+          <div class="guns-grid">
+            <!-- برای افزودن اسلحه جدید کافیست یک div مانند زیر اضافه کنید -->
+            <div class="gun-card">
+              <img src="M4A1.webp" alt="M4A1">
+              <span>M4A1</span>
+            </div>
+            <div class="gun-card">
+              <img src="Ak47.webp" alt="Ak47">
+              <span>Ak47</span>
+            </div>
+            <div class="gun-card">
+              <img src="Kag-6.webp" alt="Kag-6">
+              <span>Kag-6</span>
+            </div>
+            <div class="gun-card">
+              <img src="Scar.webp" alt="Scar">
+              <span>Scar</span>
+            </div>
+            <!-- اسلحه جدید -->
+            <!--
+            <div class="gun-card">
+              <img src="NEW_IMAGE.webp" alt="NEW_WEAPON">
+              <span>NEW_WEAPON</span>
+            </div>
+            -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Submachine Guns (SMG) -->
+      <div class="accordion-section">
+        <button class="accordion-title">Submachine Guns (SMG)</button>
+        <div class="accordion-content">
+          <div class="guns-grid">
+            <div class="gun-card">
+              <img src="Mp5.webp" alt="Mp5">
+              <span>Mp5</span>
+            </div>
+            <div class="gun-card">
+              <img src="Vector.webp" alt="Vector">
+              <span>Vector</span>
+            </div>
+            <!-- ... -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Shotguns -->
+      <div class="accordion-section">
+        <button class="accordion-title">Shotguns</button>
+        <div class="accordion-content">
+          <div class="guns-grid">
+            <div class="gun-card">
+              <img src="Origin-12.webp" alt="Origin-12">
+              <span>Origin-12</span>
+            </div>
+            <div class="gun-card">
+              <img src="Mp155.webp" alt="Mp155">
+              <span>Mp155</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Light Machine Guns (LMG) -->
+      <div class="accordion-section">
+        <button class="accordion-title">Light Machine Guns (LMG)</button>
+        <div class="accordion-content">
+          <div class="guns-grid">
+            <div class="gun-card">
+              <img src="Pkm.webp" alt="Pkm">
+              <span>Pkm</span>
+            </div>
+            <div class="gun-card">
+              <img src="Minigun.webp" alt="Minigun">
+              <span>Minigun</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Snipers -->
+      <div class="accordion-section">
+        <button class="accordion-title">Snipers</button>
+        <div class="accordion-content">
+          <div class="guns-grid">
+            <div class="gun-card">
+              <img src="Kala.webp" alt="Kala">
+              <span>Kala</span>
+            </div>
+            <div class="gun-card">
+              <img src="M700.webp" alt="M700">
+              <span>M700</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary -->
+      <div class="accordion-section">
+        <button class="accordion-title">Secondary</button>
+        <div class="accordion-content">
+          <div class="guns-grid">
+            <div class="gun-card">
+              <img src="Glock.webp" alt="Glock">
+              <span>Glock</span>
+            </div>
+            <div class="gun-card">
+              <img src="Deagle.webp" alt="Deagle">
+              <span>Deagle</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- End Accordion -->
+  </div>
+
+  <footer class="text-center mt-16 py-8 border-t border-slate-700">
+    <p style="direction: ltr;" class="text-slate-400">&copy; 2025 bloodstrikefarsi-web. All rights reserved.</p>
+    <p class="text-slate-500 text-sm mt-1">Designed with ♥ And HTML,CSS,JS , @BloodStrike-Farsi</p>
+  </footer>
+
   <script>
-    const tabs = document.querySelectorAll('.tab-btn');
-    const contents = document.querySelectorAll('.tab-content');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t=>t.classList.remove('active'));
-        tab.classList.add('active');
-        contents.forEach(c=>c.classList.remove('active'));
-        document.getElementById(tab.dataset.tab).classList.add('active');
+    // Accordion logic
+    document.querySelectorAll('.accordion-title').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var section = this.parentElement;
+        var wasOpen = section.classList.contains('open');
+        document.querySelectorAll('.accordion-section').forEach(function(sec){
+          sec.classList.remove('open');
+        });
+        if (!wasOpen) section.classList.add('open');
+      });
+    });
+
+    // Navbar mobile menu logic
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      const menuToggle = document.getElementById('menuToggle');
+      if (menu && menuToggle) {
+        menu.classList.toggle('open');
+        menuToggle.classList.toggle('open');
+      }
+    }
+    const menuToggleElement = document.getElementById('menuToggle');
+    if (menuToggleElement) {
+      menuToggleElement.addEventListener('click', toggleMenu);
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+      const links = document.querySelectorAll(".navbar .menu a");
+      const currentPath = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
+      links.forEach(link => {
+        const linkPath = link.getAttribute("href").substring(link.getAttribute("href").lastIndexOf('/') + 1);
+        if (linkPath === currentPath || (currentPath === "" && linkPath === "index.html")) {
+          link.classList.add("active");
+        }
       });
     });
   </script>
