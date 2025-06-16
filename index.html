@@ -9,247 +9,248 @@
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <!-- اگر animated-text.css داشتی و لازم بود، اینجا اضافه کن (خارج از <style>) -->
+    <!-- <link rel="stylesheet" href="animated-text.css"> -->
     <style>
-        <link rel="stylesheet" href="animated-text.css">
       body {
-  font-family: 'Vazirmatn', 'Inter', sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
-  background: linear-gradient(-45deg, #0f2027, #2c5364, #0fffc0, #ff0040);
-  background-size: 400% 400%;
-  animation: gradientBG 13s ease infinite;
-}
-@keyframes gradientBG {
-  0% {background-position:0% 50%;}
-  50% {background-position:100% 50%;}
-  100% {background-position:0% 50%;}
-}
-        #particle-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.8;
-        }
-        .main-content {
-            position: relative;
-            z-index: 1;
-        }
-        .glass-box {
-            background: rgba(30, 41, 59, 0.65);
-            border: 2px solid #0fffc0;
-            border-radius: 22px;
-            box-shadow: 0 0 32px #0fffc033;
-            backdrop-filter: blur(18px);
-            padding: 2rem 1.6rem 1.5rem 1.6rem;
-            margin-bottom: 2.3rem;
-            opacity: 0;
-            transform: translateY(80px);
-            transition: opacity 0.9s cubic-bezier(.39,.58,.57,1), transform 0.9s cubic-bezier(.39,.58,.57,1);
-            text-align: center;
-        }
-        .glass-box.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .glass-title {
-            font-size: 2rem;
-            color: #0fffc0;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            text-align: center;
-            letter-spacing: -.01em;
-        }
-        .neon-card {
-            background: rgba(0,0,0,0.39);
-            border: 2.5px solid #0fffc0;
-            border-radius: 18px;
-            box-shadow: 0 0 30px #0fffc070, 0 0 0 1px #222;
-            display: flex;
-            align-items: center;
-            padding: 1.15rem 1.5rem;
-            gap: 1.1rem;
-            margin: 0.5rem 0;
-            min-width: 190px;
-            min-height: 70px;
-            transition: box-shadow 0.28s, border 0.28s, transform 0.2s;
-            cursor: pointer;
-            justify-content: center;
-        }
-        .neon-card:hover {
-            border-color: #ff0040;
-            box-shadow: 0 0 30px #ff004080,0 0 0 2px #111;
-            transform: translateY(-3px) scale(1.035);
-        }
-        .neon-icon {
-            font-size: 2.05rem;
-            color: #0fffc0;
-            filter: drop-shadow(0 0 8px #0fffc0cc);
-            min-width: 38px; min-height: 38px;
-            background: #10151c;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .neon-card span {
-            font-size: 1.07rem;
-            font-weight: 700;
-            color: #0fffc0;
-            letter-spacing: .01em;
-        }
-        .glass-box.details-animate {
-            transition: opacity 0.9s cubic-bezier(.39,.58,.57,1), transform 0.9s cubic-bezier(.39,.58,.57,1);
-            opacity: 0;
-            transform: translateX(-120px) scale(0.98);
-            text-align: center;
-        }
-        .glass-box.details-animate.visible {
-            opacity: 1 !important;
-            transform: translateX(0) scale(1) !important;
-        }
-        .details-black {
-            color: #181818;
-            font-size: 1.07rem;
-            font-weight: 500;
-            text-align: center;
-        }
-        .section-label {
-            font-size: 1.45rem; font-weight: bold;
-            letter-spacing: -.02em;
-            color: #181818;
-            margin-bottom: .6rem;
-            margin-top: .7rem;
-            text-align: center;
-        }
-        .edu-cards {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-top: 1.2rem;
-        }
-        .edu-glass-card {
-            background: rgba(30, 41, 59, 0.74);
-            border: 2px solid #0fffc0;
-            border-radius: 19px;
-            box-shadow: 0 0 19px #0fffc033;
-            backdrop-filter: blur(9px);
-            padding: 1.2rem 1rem 1rem 1rem;
-            min-width: 185px;
-            max-width: 230px;
-            min-height: 180px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: border 0.19s, box-shadow 0.19s, transform 0.22s;
-            cursor: pointer;
-            position: relative;
-        }
-        .edu-glass-card:hover {
-            border-color: #ff0040;
-            box-shadow: 0 0 25px #ff004080,0 0 0 2px #111;
-            transform: translateY(-4px) scale(1.045);
-        }
-        .edu-glass-card img {
-            width: 55px; height: 55px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            background: #0fffc016;
-            box-shadow: 0 0 11px #0fffc040;
-        }
-        .edu-glass-card h3 {
-            color: #0fffc0;
-            font-size: 1.09rem;
-            margin-bottom: .45rem;
-            font-weight: bold;
-        }
-        .edu-glass-card span {
-            font-size: 0.97rem;
-            color: #181818;
-        }
-        .status-flex {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.3rem;
-            justify-content: center;
-            align-items: flex-start;
-        }
-        .status-box {
-            background: rgba(0,0,0,0.21);
-            border: 2px solid #0fffc0;
-            border-radius: 14px;
-            box-shadow: 0 0 16px #0fffc033;
-            padding: 1.2rem 2.2rem 1.2rem 2.2rem;
-            min-width: 180px;
-            margin: 0.4rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .status-label {
-            color: #0fffc0;
-            font-weight: bold;
-            font-size: 1.1rem;
-            text-align: center;
-        }
-        .status-value {
-            color: #ff0040;
-            font-size: 1.75rem;
-            font-weight: bold;
-            text-align: center;
-        }
-        .neon-nav {
-            display: flex;
-            justify-content: center;
-            gap: 2.5rem;
-            margin-top: 25px;
-            margin-bottom: 35px;
-            z-index: 2;
-            position: relative;
-            flex-wrap: wrap;
-        }
-        .neon-nav-link {
-            color: #0fffc0;
-            font-weight: bold;
-            font-size: 1.1rem;
-            text-decoration: none;
-            padding-bottom: 5px;
-            position: relative;
-            transition: color 0.22s;
-            text-align: center;
-        }
-        .neon-nav-link:hover { color: #ff0040; }
-        .neon-nav-link.active { color: #ff0040; }
-        .neon-nav-link::after {
-            content: "";
-            display: block;
-            height: 4px;
-            margin: 0 auto;
-            width: 60%;
-            border-radius: 6px;
-            background: linear-gradient(90deg,#0fffc0 0%,#181818 40%,#ff0040 100%);
-            box-shadow: 0 0 8px #0fffc0bb;
-            transition: background .3s;
-            margin-top: 5px;
-        }
-        .neon-nav-link.active::after, .neon-nav-link:hover::after {
-            background: linear-gradient(90deg,#ff0040 0%,#0fffc0 40%,#ff0040 100%) !important;
-            box-shadow: 0 0 12px #ff0040bb;
-        }
-        @media (max-width: 900px) {
-            .edu-cards { gap: 1rem; }
-            .edu-glass-card { min-width: 150px; max-width: 180px; }
-            .glass-title { font-size: 1.15rem; }
-        }
-        @media (max-width: 600px) {
-            .edu-cards { flex-direction: column; align-items: center; }
-            .neon-nav { gap: 1.1rem; }
-            .glass-box { padding: 1rem .4rem 1rem .4rem; }
-            .glass-title { font-size: 1.05rem; }
-        }
+        font-family: 'Vazirmatn', 'Inter', sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+        background: linear-gradient(-45deg, #0f2027, #2c5364, #0fffc0, #ff0040);
+        background-size: 400% 400%;
+        animation: gradientBG 13s ease infinite;
+      }
+      @keyframes gradientBG {
+        0% {background-position:0% 50%;}
+        50% {background-position:100% 50%;}
+        100% {background-position:0% 50%;}
+      }
+      #particle-canvas {
+          position: fixed;
+          top: 0; left: 0;
+          width: 100vw; height: 100vh;
+          z-index: 0;
+          pointer-events: none;
+          opacity: 0.8;
+      }
+      .main-content {
+          position: relative;
+          z-index: 1;
+      }
+      .glass-box {
+          background: rgba(30, 41, 59, 0.65);
+          border: 2px solid #0fffc0;
+          border-radius: 22px;
+          box-shadow: 0 0 32px #0fffc033;
+          backdrop-filter: blur(18px);
+          padding: 2rem 1.6rem 1.5rem 1.6rem;
+          margin-bottom: 2.3rem;
+          opacity: 0;
+          transform: translateY(80px);
+          transition: opacity 0.9s cubic-bezier(.39,.58,.57,1), transform 0.9s cubic-bezier(.39,.58,.57,1);
+          text-align: center;
+      }
+      .glass-box.visible {
+          opacity: 1;
+          transform: translateY(0);
+      }
+      .glass-title {
+          font-size: 2rem;
+          color: #0fffc0;
+          font-weight: bold;
+          margin-bottom: 1rem;
+          text-align: center;
+          letter-spacing: -.01em;
+      }
+      .neon-card {
+          background: rgba(0,0,0,0.39);
+          border: 2.5px solid #0fffc0;
+          border-radius: 18px;
+          box-shadow: 0 0 30px #0fffc070, 0 0 0 1px #222;
+          display: flex;
+          align-items: center;
+          padding: 1.15rem 1.5rem;
+          gap: 1.1rem;
+          margin: 0.5rem 0;
+          min-width: 190px;
+          min-height: 70px;
+          transition: box-shadow 0.28s, border 0.28s, transform 0.2s;
+          cursor: pointer;
+          justify-content: center;
+      }
+      .neon-card:hover {
+          border-color: #ff0040;
+          box-shadow: 0 0 30px #ff004080,0 0 0 2px #111;
+          transform: translateY(-3px) scale(1.035);
+      }
+      .neon-icon {
+          font-size: 2.05rem;
+          color: #0fffc0;
+          filter: drop-shadow(0 0 8px #0fffc0cc);
+          min-width: 38px; min-height: 38px;
+          background: #10151c;
+          border-radius: 50%;
+          display: flex; align-items: center; justify-content: center;
+      }
+      .neon-card span {
+          font-size: 1.07rem;
+          font-weight: 700;
+          color: #0fffc0;
+          letter-spacing: .01em;
+      }
+      .glass-box.details-animate {
+          transition: opacity 0.9s cubic-bezier(.39,.58,.57,1), transform 0.9s cubic-bezier(.39,.58,.57,1);
+          opacity: 0;
+          transform: translateX(-120px) scale(0.98);
+          text-align: center;
+      }
+      .glass-box.details-animate.visible {
+          opacity: 1 !important;
+          transform: translateX(0) scale(1) !important;
+      }
+      .details-black {
+          color: #181818;
+          font-size: 1.07rem;
+          font-weight: 500;
+          text-align: center;
+      }
+      .section-label {
+          font-size: 1.45rem; font-weight: bold;
+          letter-spacing: -.02em;
+          color: #181818;
+          margin-bottom: .6rem;
+          margin-top: .7rem;
+          text-align: center;
+      }
+      .edu-cards {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1.5rem;
+          justify-content: center;
+          margin-top: 1.2rem;
+      }
+      .edu-glass-card {
+          background: rgba(30, 41, 59, 0.74);
+          border: 2px solid #0fffc0;
+          border-radius: 19px;
+          box-shadow: 0 0 19px #0fffc033;
+          backdrop-filter: blur(9px);
+          padding: 1.2rem 1rem 1rem 1rem;
+          min-width: 185px;
+          max-width: 230px;
+          min-height: 180px;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          transition: border 0.19s, box-shadow 0.19s, transform 0.22s;
+          cursor: pointer;
+          position: relative;
+      }
+      .edu-glass-card:hover {
+          border-color: #ff0040;
+          box-shadow: 0 0 25px #ff004080,0 0 0 2px #111;
+          transform: translateY(-4px) scale(1.045);
+      }
+      .edu-glass-card img {
+          width: 55px; height: 55px;
+          border-radius: 50%;
+          margin-bottom: 1rem;
+          background: #0fffc016;
+          box-shadow: 0 0 11px #0fffc040;
+      }
+      .edu-glass-card h3 {
+          color: #0fffc0;
+          font-size: 1.09rem;
+          margin-bottom: .45rem;
+          font-weight: bold;
+      }
+      .edu-glass-card span {
+          font-size: 0.97rem;
+          color: #181818;
+      }
+      .status-flex {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1.3rem;
+          justify-content: center;
+          align-items: flex-start;
+      }
+      .status-box {
+          background: rgba(0,0,0,0.21);
+          border: 2px solid #0fffc0;
+          border-radius: 14px;
+          box-shadow: 0 0 16px #0fffc033;
+          padding: 1.2rem 2.2rem 1.2rem 2.2rem;
+          min-width: 180px;
+          margin: 0.4rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+      .status-label {
+          color: #0fffc0;
+          font-weight: bold;
+          font-size: 1.1rem;
+          text-align: center;
+      }
+      .status-value {
+          color: #ff0040;
+          font-size: 1.75rem;
+          font-weight: bold;
+          text-align: center;
+      }
+      .neon-nav {
+          display: flex;
+          justify-content: center;
+          gap: 2.5rem;
+          margin-top: 25px;
+          margin-bottom: 35px;
+          z-index: 2;
+          position: relative;
+          flex-wrap: wrap;
+      }
+      .neon-nav-link {
+          color: #0fffc0;
+          font-weight: bold;
+          font-size: 1.1rem;
+          text-decoration: none;
+          padding-bottom: 5px;
+          position: relative;
+          transition: color 0.22s;
+          text-align: center;
+      }
+      .neon-nav-link:hover { color: #ff0040; }
+      .neon-nav-link.active { color: #ff0040; }
+      .neon-nav-link::after {
+          content: "";
+          display: block;
+          height: 4px;
+          margin: 0 auto;
+          width: 60%;
+          border-radius: 6px;
+          background: linear-gradient(90deg,#0fffc0 0%,#181818 40%,#ff0040 100%);
+          box-shadow: 0 0 8px #0fffc0bb;
+          transition: background .3s;
+          margin-top: 5px;
+      }
+      .neon-nav-link.active::after, .neon-nav-link:hover::after {
+          background: linear-gradient(90deg,#ff0040 0%,#0fffc0 40%,#ff0040 100%) !important;
+          box-shadow: 0 0 12px #ff0040bb;
+      }
+      @media (max-width: 900px) {
+          .edu-cards { gap: 1rem; }
+          .edu-glass-card { min-width: 150px; max-width: 180px; }
+          .glass-title { font-size: 1.15rem; }
+      }
+      @media (max-width: 600px) {
+          .edu-cards { flex-direction: column; align-items: center; }
+          .neon-nav { gap: 1.1rem; }
+          .glass-box { padding: 1rem .4rem 1rem .4rem; }
+          .glass-title { font-size: 1.05rem; }
+      }
     </style>
 </head>
 <body>
@@ -299,8 +300,8 @@
     <div class="glass-box details-animate reveal" id="comm-details">
         <div class="section-label" style="color:#0fffc0;">درباره کامیونیتی ما</div>
         <div class="details-black" style="font-size:1.08rem;">
-            بلاد استرایک فارسی اولین و بزرگ‌ترین کامیونیتی بلاد استرایک در ایران است که فعالیت خودش رو از ۲ تیر ۱۴۰۲ آغاز کرده.<br>
-            تا کنون در شبکه‌های اجتماعی زیادی فعالیت داشته. همین حالا به ما بپیوندید تا از آخرین اخبار و جزئیات گیم، کاستوم روم‌ها و بیشتر باخبر بشید.
+            بلاد استرایک فارسی اولین و بزرگ‌ترین کامیونیتی بلاد استرایک در ایران است که فعالیت خودش رو از ۲ تیر ۱۴۰[...]
+            تا کنون در شبکه‌های اجتماعی زیادی فعالیت داشته. همین حالا به ما بپیوندید تا از آخرین اخبار و جزئیات گیم�[...]
         </div>
     </div>
 
