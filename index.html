@@ -24,21 +24,21 @@
         50% {background-position:100% 50%;}
         100% {background-position:0% 50%;}
       }
-      /* افکت انیمیشن متنی */
-      @keyframes fadeInUpText {
-        from {
-          opacity: 0;
-          transform: translateY(34px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .animated-text {
+      /* Reveal animation directions */
+      .reveal {
         opacity: 0;
-        animation: fadeInUpText 1s cubic-bezier(.39,.58,.57,1) forwards;
+        transition: all 0.7s cubic-bezier(.39,.58,.57,1);
+        will-change: opacity, transform;
       }
+      .reveal.active {
+        opacity: 1;
+        transform: translate(0,0) !important;
+      }
+      .reveal-from-left    { transform: translateX(-70px);}
+      .reveal-from-right   { transform: translateX(70px);}
+      .reveal-from-top     { transform: translateY(-70px);}
+      .reveal-from-bottom  { transform: translateY(70px);}
+      /* سایر استایل‌ها */
       #particle-canvas {
           position: fixed;
           top: 0; left: 0;
@@ -270,7 +270,7 @@
 <canvas id="particle-canvas"></canvas>
 <div class="main-content container mx-auto px-2 py-8" style="margin-top:30px;max-width:1000px;">
     <!-- Navigation (Neon tabs) -->
-    <nav class="neon-nav">
+    <nav class="neon-nav reveal">
         <a href="index.html" class="neon-nav-link active">خانه</a>
         <a href="Attachments/index.html" class="neon-nav-link">اتچمنت‌ها</a>
         <a href="BetterPing/index.html" class="neon-nav-link">رفع تحریم‌ها</a>
@@ -278,13 +278,13 @@
     </nav>
 
     <!-- سایت و شعار -->
-    <div class="glass-box visible" style="text-align:center; margin-bottom:1.1rem;">
-        <div class="glass-title" style="font-size:2.2rem; margin-bottom:0.45rem;">bloodstrikefarsi-web</div>
+    <div class="glass-box reveal" style="text-align:center; margin-bottom:1.1rem;">
+        <div class="glass-title">bloodstrikefarsi-web</div>
         <div style="font-size:1.16rem; color:#111; font-weight:600;">سایت آموزشات بلاد استرایک فارسی</div>
     </div>
 
     <!-- شبکه‌های اجتماعی -->
-    <div class="flex flex-wrap justify-center gap-5 mb-8">
+    <div class="flex flex-wrap justify-center gap-5 mb-8 reveal">
         <a href="https://t.me/BloodStrikeFarsi" target="_blank" class="neon-card">
             <span class="neon-icon" style="background:#0088cc1e;"><i class="fab fa-telegram"></i></span>
             <span>چنل تلگرام</span>
@@ -319,27 +319,23 @@
     </div>
 
     <!-- آموزش‌ها -->
-    <div class="glass-title" style="font-size:1.7rem; color:#0fffc0; margin-bottom:0.2rem;">بخش آموزش‌ها</div>
-    <div class="edu-cards">
-        <!-- خرید گلد بازی -->
+    <div class="glass-title reveal" style="font-size:1.7rem; color:#0fffc0; margin-bottom:0.2rem;">بخش آموزش‌ها</div>
+    <div class="edu-cards reveal">
         <a href="BuyGold/index.html" class="edu-glass-card">
             <img src="images/gold.webp" alt="خرید گلد بازی">
             <h3>خرید گلد بازی</h3>
             <span>آموزش کامل خرید گلد و آیتم‌ها</span>
         </a>
-        <!-- لیست اتچمنت‌ها -->
         <a href="Attachments/index.html" class="edu-glass-card">
             <img src="images/attachments.webp" alt="لیست اتچمنت‌ها">
             <h3>لیست اتچمنت‌ها</h3>
             <span>راهنمای جامع اتچمنت‌های بازی</span>
         </a>
-        <!-- رفع تحریم ها -->
         <a href="BetterPing/index.html" class="edu-glass-card">
             <img src="images/lagslayericon.webp" alt="رفع تحریم‌ها">
             <h3>رفع تحریم‌ها</h3>
             <span>روش‌های جدید رفع تحریم و کاهش پینگ</span>
         </a>
-        <!-- کل آموزش ها -->
         <a href="Tutorials/index.html" class="edu-glass-card">
             <img src="images/tutorials.png" alt="کل آموزش‌ها">
             <h3>کل آموزش‌ها</h3>
@@ -362,7 +358,7 @@
         </div>
     </div>
 </div>
-<footer class="text-center mt-16 py-8 border-t border-slate-700" style="z-index:10;position:relative;">
+<footer class="text-center mt-16 py-8 border-t border-slate-700 reveal" style="z-index:10;position:relative;">
     <p style="direction: ltr;" class="text-slate-400">&copy; 2025 bloodstrikefarsi-web. All rights reserved.</p>
     <p class="text-slate-500 text-sm mt-1">Designed with ♥ And HTML, CSS, JS , @BloodStrike-Farsi</p>
 </footer>
@@ -456,43 +452,35 @@
     initParticles();
     animateParticles();
 </script>
-<!-- انیمیشن متن‌ها -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const tags = ["p", "h1", "h2", "h3", "h4", "h5", "h6", "span", "a", "li", "label"];
-    tags.forEach(tag => {
-        document.querySelectorAll(tag).forEach((el, idx) => {
-            if (!el.classList.contains('no-animated')) {
-                el.classList.add("animated-text");
-                el.style.animationDelay = (idx * 0.06) + "s";
-            }
-        });
+    // به هر .reveal یک جهت تصادفی بده (اگر از قبل نداره)
+    const directions = ['reveal-from-left', 'reveal-from-right', 'reveal-from-top', 'reveal-from-bottom'];
+    document.querySelectorAll('.reveal').forEach(el => {
+        if(!el.classList.contains('reveal-from-left') &&
+           !el.classList.contains('reveal-from-right') &&
+           !el.classList.contains('reveal-from-top') &&
+           !el.classList.contains('reveal-from-bottom')) {
+             el.classList.add(directions[Math.floor(Math.random()*directions.length)]);
+        }
     });
-});
-</script>
-<script>
     function revealOnScroll() {
-        const reveals = document.querySelectorAll('.glass-box.reveal');
-        const winHeight = window.innerHeight;
-        reveals.forEach(function(el) {
+        document.querySelectorAll('.reveal').forEach(el => {
             const rect = el.getBoundingClientRect();
-            if (rect.top < winHeight-60) {
-                el.classList.add('visible');
-            }
-        });
-        // جزئیات کلی سایت و کامیونیتی: پرتابی
-        const specialAnims = document.querySelectorAll('.glass-box.details-animate');
-        specialAnims.forEach(function(el) {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < winHeight-60) {
-                el.classList.add('visible');
+            if (rect.top < window.innerHeight - 70 && rect.bottom > 70) {
+                el.classList.add('active');
+            } else {
+                el.classList.remove('active');
             }
         });
     }
     window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('DOMContentLoaded', function() {
-        revealOnScroll();
-        // Neon nav active highlight
+    revealOnScroll();
+});
+</script>
+<script>
+    // Neon nav active highlight
+    function revealNavHighlight() {
         const links = document.querySelectorAll(".neon-nav-link");
         const currentPath = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
         links.forEach(link => {
@@ -501,7 +489,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 link.classList.add("active");
             }
         });
-    });
+    }
+    window.addEventListener('DOMContentLoaded', revealNavHighlight);
 </script>
 </body>
 </html>
