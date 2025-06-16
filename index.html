@@ -40,6 +40,7 @@
             opacity: 0;
             transform: translateY(80px);
             transition: opacity 0.9s cubic-bezier(.39,.58,.57,1), transform 0.9s cubic-bezier(.39,.58,.57,1);
+            text-align: center;
         }
         .glass-box.visible {
             opacity: 1;
@@ -50,10 +51,9 @@
             color: #0fffc0;
             font-weight: bold;
             margin-bottom: 1rem;
-            text-align: right;
+            text-align: center;
             letter-spacing: -.01em;
         }
-        /* Social card styles */
         .neon-card {
             background: rgba(0,0,0,0.39);
             border: 2.5px solid #0fffc0;
@@ -68,6 +68,7 @@
             min-height: 70px;
             transition: box-shadow 0.28s, border 0.28s, transform 0.2s;
             cursor: pointer;
+            justify-content: center;
         }
         .neon-card:hover {
             border-color: #ff0040;
@@ -89,11 +90,11 @@
             color: #0fffc0;
             letter-spacing: .01em;
         }
-        /* Details box special animation */
         .glass-box.details-animate {
             transition: opacity 0.9s cubic-bezier(.39,.58,.57,1), transform 0.9s cubic-bezier(.39,.58,.57,1);
             opacity: 0;
             transform: translateX(-120px) scale(0.98);
+            text-align: center;
         }
         .glass-box.details-animate.visible {
             opacity: 1 !important;
@@ -103,17 +104,16 @@
             color: #181818;
             font-size: 1.07rem;
             font-weight: 500;
+            text-align: center;
         }
-        /* Section titles */
         .section-label {
             font-size: 1.45rem; font-weight: bold;
             letter-spacing: -.02em;
             color: #181818;
             margin-bottom: .6rem;
             margin-top: .7rem;
-            text-align: right;
+            text-align: center;
         }
-        /* آموزش‌ها شناور */
         .edu-cards {
             display: flex;
             flex-wrap: wrap;
@@ -162,7 +162,6 @@
             font-size: 0.97rem;
             color: #181818;
         }
-        /* وضعیت چنل */
         .status-flex {
             display: flex;
             flex-wrap: wrap;
@@ -186,13 +185,14 @@
             color: #0fffc0;
             font-weight: bold;
             font-size: 1.1rem;
+            text-align: center;
         }
         .status-value {
             color: #ff0040;
             font-size: 1.75rem;
             font-weight: bold;
+            text-align: center;
         }
-        /* Animated neon underlines for nav */
         .neon-nav {
             display: flex;
             justify-content: center;
@@ -211,6 +211,7 @@
             padding-bottom: 5px;
             position: relative;
             transition: color 0.22s;
+            text-align: center;
         }
         .neon-nav-link:hover { color: #ff0040; }
         .neon-nav-link.active { color: #ff0040; }
@@ -245,7 +246,6 @@
 </head>
 <body>
 <canvas id="particle-canvas"></canvas>
-<!-- سایت و شعار -->
 <div class="main-content container mx-auto px-2 py-8" style="margin-top:30px;max-width:1000px;">
     <!-- Navigation (Neon tabs) -->
     <nav class="neon-nav">
@@ -271,7 +271,7 @@
             <span class="neon-icon" style="background:#dd2a7b1e;"><i class="fab fa-instagram"></i></span>
             <span>پیج اینستاگرام</span>
         </a>
-        <a href="https://t.me/BloodStrikeFarsiShop" target="_blank" class="neon-card">
+        <a href="https://t.me/etemadshopfarsi" target="_blank" class="neon-card">
             <span class="neon-icon" style="background:#1de9b61e;"><i class="fas fa-shopping-cart"></i></span>
             <span>چنل شاپ و رفع تحریم</span>
         </a>
@@ -331,15 +331,14 @@
         <div class="status-flex">
             <div class="status-box">
                 <div class="status-label">دنبال‌کننده‌های کانال</div>
-                <div class="status-value" id="channel-followers">۲۵۰۰+</div>
+                <div class="status-value" id="channel-followers">3600+</div>
             </div>
             <div class="status-box">
                 <div class="status-label">دنبال‌کننده‌های گپ</div>
-                <div class="status-value" id="group-followers">۱۲۰۰+</div>
+                <div class="status-value" id="group-followers">1200+</div>
             </div>
         </div>
     </div>
-
 </div>
 <footer class="text-center mt-16 py-8 border-t border-slate-700" style="z-index:10;position:relative;">
     <p style="direction: ltr;" class="text-slate-400">&copy; 2025 bloodstrikefarsi-web. All rights reserved.</p>
@@ -435,7 +434,6 @@
     initParticles();
     animateParticles();
 </script>
-<!-- Reveal on scroll script -->
 <script>
     function revealOnScroll() {
         const reveals = document.querySelectorAll('.glass-box.reveal');
