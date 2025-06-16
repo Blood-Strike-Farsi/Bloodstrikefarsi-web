@@ -11,13 +11,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     <style>
         <link rel="stylesheet" href="animated-text.css">
-        body {
-            font-family: 'Vazirmatn', 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
+      body {
+  font-family: 'Vazirmatn', 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  background: linear-gradient(-45deg, #0f2027, #2c5364, #0fffc0, #ff0040);
+  background-size: 400% 400%;
+  animation: gradientBG 13s ease infinite;
+}
+@keyframes gradientBG {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
         #particle-canvas {
             position: fixed;
             top: 0; left: 0;
