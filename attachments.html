@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>Attachments | bloodstrikefarsi</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: Tahoma, 'Vazirmatn', sans-serif;
+      background: linear-gradient(135deg,#f5f6fa 0%,#e2eafc 100%);
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      width: 100vw;
+      min-height: 100vh;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .logo { display: block; margin: 2.2rem auto 1.5rem auto; width: 140px; border-radius: 16px; }
+    h1 { color: #c22c2c; text-align:center; font-size:2em; margin-bottom:1.3em;}
+    .tabs { display: flex; flex-wrap:wrap; gap: 10px; justify-content:center; margin-bottom:2em;}
+    .tab-btn {
+      background: #f2f2f2;
+      color: #222;
+      border: none;
+      border-radius: 8px 8px 0 0;
+      padding: 0.7em 1.5em;
+      font-size: 1.08em;
+      cursor: pointer;
+      font-weight:bold;
+      transition: background .18s, color .18s;
+      box-shadow: 0 2px 8px #0001;
+    }
+    .tab-btn.active, .tab-btn:focus {
+      background: #c22c2c;
+      color: #fff;
+      outline:none;
+    }
+    .tab-content { display: none; text-align:center; min-height:180px;}
+    .tab-content.active { display: block; }
+    .back-btn {display:block; color:#fff; background:#1b75cf; padding:.7em 0; margin:2.2em 0 0 0;border-radius:8px;text-align:center;font-weight:bold;text-decoration:none; width:180px;}
+    @media (max-width: 700px) {
+      .container {padding:0;}
+      .logo {width:85px;}
+      .tabs{gap:3px;}
+      .tab-btn{padding:.5em .9em;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="logo.png" class="logo" alt="لوگو bloodstrikefarsi">
+    <h1>Attachments | bloodstrikefarsi</h1>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="assault">Assault Rifles</button>
+      <button class="tab-btn" data-tab="sniper">Snipers</button>
+      <button class="tab-btn" data-tab="shotgun">Shotguns</button>
+      <button class="tab-btn" data-tab="smg">SMGs</button>
+      <button class="tab-btn" data-tab="pistol">Pistols</button>
+      <button class="tab-btn" data-tab="special">Specials</button>
+    </div>
+    <div class="tab-content active" id="assault">
+      <!-- عکس‌ها و اتچمنت‌های Assault Rifles اینجا قرار می‌گیرند -->
+    </div>
+    <div class="tab-content" id="sniper">
+      <!-- عکس‌ها و اتچمنت‌های Snipers اینجا قرار می‌گیرند -->
+    </div>
+    <div class="tab-content" id="shotgun">
+      <!-- عکس‌ها و اتچمنت‌های Shotguns اینجا قرار می‌گیرند -->
+    </div>
+    <div class="tab-content" id="smg">
+      <!-- عکس‌ها و اتچمنت‌های SMGs اینجا قرار می‌گیرند -->
+    </div>
+    <div class="tab-content" id="pistol">
+      <!-- عکس‌ها و اتچمنت‌های Pistols اینجا قرار می‌گیرند -->
+    </div>
+    <div class="tab-content" id="special">
+      <!-- عکس‌ها و اتچمنت‌های Specials اینجا قرار می‌گیرند -->
+    </div>
+
+    <a class="back-btn" href="index.html">بازگشت به صفحه اصلی</a>
+  </div>
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t=>t.classList.remove('active'));
+        tab.classList.add('active');
+        contents.forEach(c=>c.classList.remove('active'));
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
