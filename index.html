@@ -1,4 +1,3 @@
-Hami, [6/16/2025 3:41 PM]
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -114,9 +113,7 @@ Hami, [6/16/2025 3:41 PM]
             color: #181818;
             margin-bottom: .6rem;
             margin-top: .7rem;
-
-Hami, [6/16/2025 3:41 PM]
-text-align: center;
+            text-align: center;
         }
         .edu-cards {
             display: flex;
@@ -243,9 +240,7 @@ text-align: center;
         @media (max-width: 600px) {
             .edu-cards { flex-direction: column; align-items: center; }
             .neon-nav { gap: 1.1rem; }
-
-Hami, [6/16/2025 3:41 PM]
-.glass-box { padding: 1rem .4rem 1rem .4rem; }
+            .glass-box { padding: 1rem .4rem 1rem .4rem; }
             .glass-title { font-size: 1.05rem; }
         }
     </style>
@@ -302,8 +297,7 @@ Hami, [6/16/2025 3:41 PM]
         </div>
     </div>
 
-Hami, [6/16/2025 3:41 PM]
-<!-- آموزش‌ها -->
+    <!-- آموزش‌ها -->
     <div class="glass-title" style="font-size:1.7rem; color:#0fffc0; margin-bottom:0.2rem;">بخش آموزش‌ها</div>
     <div class="edu-cards">
         <!-- خرید گلد بازی -->
@@ -349,7 +343,7 @@ Hami, [6/16/2025 3:41 PM]
 </div>
 <footer class="text-center mt-16 py-8 border-t border-slate-700" style="z-index:10;position:relative;">
     <p style="direction: ltr;" class="text-slate-400">&copy; 2025 bloodstrikefarsi-web. All rights reserved.</p>
-    <p class="text-slate-500 text-sm mt-1">Designed with ♥️ And HTML, CSS, JS , @BloodStrike-Farsi</p>
+    <p class="text-slate-500 text-sm mt-1">Designed with ♥ And HTML, CSS, JS , @BloodStrike-Farsi</p>
 </footer>
 <!-- Particle background script -->
 <script>
@@ -377,8 +371,8 @@ Hami, [6/16/2025 3:41 PM]
             ctx.fill();
         }
         update() {
-            if (this.x > canvas.width  this.x < 0) this.directionX = -this.directionX;
-            if (this.y > canvas.height  this.y < 0) this.directionY = -this.directionY;
+            if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+            if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
             this.x += this.directionX;
             this.y += this.directionY;
             this.draw();
@@ -399,9 +393,7 @@ Hami, [6/16/2025 3:41 PM]
             let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
             let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
             let directionX = (Math.random() * 0.4) - 0.2;
-
-Hami, [6/16/2025 3:41 PM]
-let directionY = (Math.random() * 0.4) - 0.2;
+            let directionY = (Math.random() * 0.4) - 0.2;
             let color = particleColors[Math.floor(Math.random() * particleColors.length)];
             particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
         }
@@ -418,14 +410,14 @@ let directionY = (Math.random() * 0.4) - 0.2;
         let opacityValue = 1;
         for (let a = 0; a < particlesArray.length; a++) {
             for (let b = a; b < particlesArray.length; b++) {
-                let distance = ((particlesArray[a].x - particlesArray[b].x)  2)
-                             + ((particlesArray[a].y - particlesArray[b].y)  2);
+                let distance = ((particlesArray[a].x - particlesArray[b].x) ** 2)
+                             + ((particlesArray[a].y - particlesArray[b].y) ** 2);
                 let connectDistance = (canvas.width/10) * (canvas.height/10) / 50;
                 connectDistance = Math.min(connectDistance, 120*120);
                 connectDistance = Math.max(connectDistance, 70*70);
                 if (distance < connectDistance) {
                     opacityValue = 1 - (distance / (connectDistance * 1.1));
-                    let lineColor = particlesArray[a].color.replace(/[\d\.]+\)$/g, ${Math.max(0, opacityValue - 0.3)}));
+                    let lineColor = particlesArray[a].color.replace(/[\d\.]+\)$/g, `${Math.max(0, opacityValue - 0.3)})`);
                     ctx.strokeStyle = lineColor;
                     ctx.lineWidth = 0.5;
                     ctx.beginPath();
