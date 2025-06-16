@@ -12,3 +12,17 @@
   opacity: 0;
   animation: fadeInUpText 1s cubic-bezier(.39,.58,.57,1) forwards;
 }
+document.addEventListener("DOMContentLoaded", function() {
+  // همه تگ‌های متنی که می‌خواهیم متحرک شوند
+  const tags = ["p", "h1", "h2", "h3", "h4", "h5", "h6", "span", "a", "li", "label"];
+  tags.forEach(tag => {
+    document.querySelectorAll(tag).forEach((el, idx) => {
+      // اگر تگ داخل navbar یا footer یا ... است و نمی‌خواهی، اینجا فیلتر کن
+      if (!el.classList.contains('no-animated')) {
+        el.classList.add("animated-text");
+        // برای افکت شیک‌تر، تاخیر افزایشی (stagger) بده:
+        el.style.animationDelay = (idx * 0.06) + "s";
+      }
+    });
+  });
+});
