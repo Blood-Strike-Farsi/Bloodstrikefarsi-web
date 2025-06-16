@@ -2,20 +2,19 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>bloodstrikefarsi-web</title>
+    <title>bloodstrikefarsi-web | مرجع فارسی BloodStrike</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Tailwind CSS for quick styling -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
     <link rel="stylesheet" href="navbar.css">
     <style>
         body {
             font-family: 'Vazirmatn', 'Inter', sans-serif;
-            min-height: 100vh;
             background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
-            position: relative;
+            min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
         }
         #particle-canvas {
             position: fixed;
@@ -28,57 +27,42 @@
             position: relative;
             z-index: 1;
         }
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(30, 41, 59, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 50;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem 1rem;
-            border-bottom: 2px solid #38bdf8;
+        .glass-box {
+            background: rgba(30, 41, 59, 0.55);
+            border: 2px solid #38bdf8;
+            border-radius: 22px;
+            box-shadow: 0 0 32px #38bdf83b;
+            backdrop-filter: blur(15px);
+            padding: 2.2rem 1.6rem 1.6rem 1.6rem;
+            margin-bottom: 2.3rem;
+            opacity: 0;
+            transform: translateY(80px);
+            transition: opacity 0.9s cubic-bezier(.39,.58,.57,1), transform 0.9s cubic-bezier(.39,.58,.57,1);
         }
-        .menu-toggle {
-            display: none;
+        .glass-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .glass-title {
             font-size: 1.5rem;
             color: #38bdf8;
-            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-align: right;
+            letter-spacing: -.01em;
         }
-        .menu {
-            display: flex;
-            gap: 1.5rem;
-        }
-        .menu a {
-            color: #e2e8f0;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        .menu a:hover {
+        .stat-box {
+            background: #0e3a4d;
             color: #38bdf8;
+            border-radius: 12px;
+            padding: 0.7rem 1.1rem;
+            display: inline-block;
+            margin: 0 0.8rem 0.8rem 0;
+            font-size: 1.1rem;
         }
-        @media (max-width: 640px) {
-            .menu {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(30, 41, 59, 0.95);
-                padding: 1rem 0;
-                border-top: 2px solid #38bdf8;
-            }
-            .menu.open {
-                display: flex;
-            }
-            .menu-toggle {
-                display: block;
-            }
+        @media (max-width: 700px) {
+            .glass-box { padding: 1.2rem 0.7rem; }
+            .glass-title { font-size: 1.15rem; }
         }
     </style>
 </head>
@@ -88,43 +72,84 @@
         <span class="menu-toggle" id="menuToggle">☰</span>
         <div class="menu" id="menu">
             <a href="index.html">خانه</a>
-            <a href="Attachments/index.html">اتچمنت‌ها</a>
-            <a href="BetterPing/index.html">رفع تحریم‌ها</a>
-            <a href="Tutorials/index.html">کل آموزش ها</a>
+            <a href="Tutorials/index.html">آموزش‌ها</a>
+            <a href="BetterPing/index.html">رفع تحریم</a>
+            <a href="Community.html">کامیونیتی</a>
+            <a href="Contact.html">تماس با ما</a>
         </div>
     </div>
-    <div class="main-content container mx-auto px-4 py-8">
-        <header class="text-center mb-10">
-            <h1 style="margin-top: 60px;" class="text-4xl font-bold text-sky-400 mb-2" data-aos="fade-down">
-                bloodstrikefarsi-web وبسایت فارسی
-            </h1>
-            <p class="text-yellow-400 text-lg md:text-xl" data-aos="fade-up" data-aos-delay="200">
-                منبع آموزش‌ها، رفع تحریم و اطلاعات بازی BloodStrike <br>
-                توسط bloodstrikefarsi-web ارائه شده است.
+    <div class="main-content container mx-auto px-2 py-8" style="margin-top:80px;max-width:1000px;">
+        <!-- معرفی سایت -->
+        <div class="glass-box reveal">
+            <div class="glass-title">bloodstrikefarsi-web چیست؟</div>
+            <p class="text-slate-200 text-base leading-8">
+                bloodstrikefarsi-web مرجع تخصصی و کامل برای بازی BloodStrike به زبان فارسی است. در این سایت می‌توانید آموزش‌های تخصصی، رفع تحریم، اخبار جدید و هرآنچه برای حرفه‌ای شدن نیاز دارید را پیدا کنید.<br>
+                جامعه ما کمک می‌کند همه بازیکنان ایرانی BloodStrike از بازی لذت بیشتری ببرند.
             </p>
-        </header>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            <a href="Attachments/index.html" class="bg-slate-800 hover:bg-sky-800 transition rounded-lg p-8 flex flex-col items-center shadow-lg" data-aos="zoom-in" data-aos-delay="100">
-                <img src="images/AttachmentBG.webp" alt="اتچمنت‌ها" class="w-24 h-24 mb-4 rounded-full shadow-lg">
-                <h2 class="text-xl font-bold text-sky-300 mb-2">اتچمنت‌ گان‌ها</h2>
-                <p class="text-slate-200 text-center">جدول و آموزش تک‌تک اتچمنت‌های بازی برای انواع اسلحه‌ها</p>
-            </a>
-            <a href="BetterPing/index.html" class="bg-slate-800 hover:bg-green-800 transition rounded-lg p-8 flex flex-col items-center shadow-lg" data-aos="zoom-in" data-aos-delay="200">
-                <img src="images/lagslayericon.webp" alt="رفع تحریم" class="w-24 h-24 mb-4 rounded-full shadow-lg">
-                <h2 class="text-xl font-bold text-green-300 mb-2">رفع تحریم و کاهش پینگ</h2>
-                <p class="text-slate-200 text-center">معرفی بهترین برنامه‌های رفع تحریم و کاهش پینگ بازی‌های آنلاین</p>
-            </a>
-            <a href="Tutorials/index.html" class="bg-slate-800 hover:bg-yellow-800 transition rounded-lg p-8 flex flex-col items-center shadow-lg" data-aos="zoom-in" data-aos-delay="300">
-                <img src="images/tutorials.png" alt="آموزش‌ها" class="w-24 h-24 mb-4 rounded-full shadow-lg">
-                <h2 class="text-xl font-bold text-yellow-300 mb-2">آموزش‌های بازی</h2>
-                <p class="text-slate-200 text-center">آموزش‌های تخصصی BloodStrike شامل ویدیو و مقاله</p>
-            </a>
         </div>
-        <footer class="text-center mt-16 py-8 border-t border-slate-700">
-            <p style="direction: ltr;" class="text-slate-400">&copy; 2025 bloodstrikefarsi-web. All rights reserved.</p>
-            <p class="text-slate-500 text-sm mt-1">Designed with ♥ And HTML,CSS,JS , @BloodStrike-Farsi</p>
-        </footer>
+        <!-- وضعیت کامیونیتی -->
+        <div class="glass-box reveal">
+            <div class="glass-title">وضعیت کامیونیتی و کانال‌ها</div>
+            <div class="flex flex-wrap gap-2 mb-2">
+                <span class="stat-box">+2500 عضو تلگرام</span>
+                <span class="stat-box">+1000 عضو دیسکورد</span>
+                <span class="stat-box">+80 آموزش و مقاله</span>
+                <span class="stat-box">فعالیت روزانه</span>
+            </div>
+            <div class="flex flex-wrap gap-4 mt-3 text-base">
+                <a href="https://t.me/BloodStrikeFarsi" class="text-sky-400 hover:text-white underline" target="_blank">ورود به تلگرام</a>
+                <a href="https://discord.gg/bloodstrikefarsi" class="text-lime-400 hover:text-white underline" target="_blank">ورود به دیسکورد</a>
+            </div>
+        </div>
+        <!-- جدیدترین آموزش‌ها -->
+        <div class="glass-box reveal">
+            <div class="glass-title">جدیدترین آموزش‌ها</div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-3">
+                <a href="Tutorials/how-to-play.html" class="bg-slate-800 hover:bg-sky-800 rounded-lg p-5 flex flex-col items-center shadow-lg transition">
+                    <img src="images/tutorials.png" alt="آموزش شروع بازی" class="w-20 h-20 mb-3 rounded-full shadow">
+                    <h3 class="text-lg text-sky-300 font-bold mb-1">آموزش شروع بازی</h3>
+                    <span class="text-slate-200 text-center text-sm">آموزش قدم به قدم برای تازه‌واردها</span>
+                </a>
+                <a href="Tutorials/anti-ban.html" class="bg-slate-800 hover:bg-sky-800 rounded-lg p-5 flex flex-col items-center shadow-lg transition">
+                    <img src="images/ban.webp" alt="رفع تحریم و بن" class="w-20 h-20 mb-3 rounded-full shadow">
+                    <h3 class="text-lg text-green-300 font-bold mb-1">رفع تحریم و بن</h3>
+                    <span class="text-slate-200 text-center text-sm">روش‌های تضمینی رفع تحریم و محدودیت</span>
+                </a>
+                <a href="Tutorials/best-guns.html" class="bg-slate-800 hover:bg-sky-800 rounded-lg p-5 flex flex-col items-center shadow-lg transition">
+                    <img src="images/guns.webp" alt="بهترین اسلحه‌ها" class="w-20 h-20 mb-3 rounded-full shadow">
+                    <h3 class="text-lg text-yellow-300 font-bold mb-1">بهترین اسلحه‌ها</h3>
+                    <span class="text-slate-200 text-center text-sm">معرفی گان‌های برتر و اتچمنت‌های پیشنهادی</span>
+                </a>
+            </div>
+            <div class="text-center mt-6">
+                <a href="Tutorials/index.html" class="inline-block bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-6 rounded transition">مشاهده همه آموزش‌ها</a>
+            </div>
+        </div>
+        <!-- راهنمای رفع تحریم -->
+        <div class="glass-box reveal">
+            <div class="glass-title">راهنمای رفع تحریم و کاهش پینگ</div>
+            <div class="flex flex-col md:flex-row gap-5 items-center">
+                <img src="images/lagslayericon.webp" alt="رفع تحریم" class="w-28 h-28 rounded-full shadow-lg bg-slate-900">
+                <div>
+                    <p class="text-slate-200 mb-2">برای بازی بی‌دغدغه و بدون لگ و محدودیت، از بخش رفع تحریم و کاهش پینگ استفاده کنید. بهترین برنامه‌ها و تنظیمات مخصوص BloodStrike تست و معرفی شده‌اند!</p>
+                    <a href="BetterPing/index.html" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded transition">رفتن به بخش رفع تحریم</a>
+                </div>
+            </div>
+        </div>
+        <!-- اخبار یا اطلاعیه -->
+        <div class="glass-box reveal">
+            <div class="glass-title">اخبار و اطلاعیه‌ها</div>
+            <ul class="list-disc pr-6 text-slate-300 text-base">
+                <li>نسخه جدید بازی BloodStrike منتشر شد | <span class="text-yellow-400">خرداد ۱۴۰۴</span></li>
+                <li>مسابقه ویژه کانال تلگرام، جایزه نقدی برای برترین بازیکن</li>
+                <li>اضافه شدن بخش اتچمنت‌ها و راهنمای اسلحه به‌زودی!</li>
+            </ul>
+        </div>
     </div>
+    <footer class="text-center mt-16 py-8 border-t border-slate-700">
+        <p style="direction: ltr;" class="text-slate-400">&copy; 2025 bloodstrikefarsi-web. All rights reserved.</p>
+        <p class="text-slate-500 text-sm mt-1">Designed with ♥ And HTML, CSS, JS , @BloodStrike-Farsi</p>
+    </footer>
     <!-- Particle background script -->
     <script>
         const canvas = document.getElementById('particle-canvas');
@@ -215,11 +240,24 @@
         initParticles();
         animateParticles();
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <!-- Reveal on scroll script -->
     <script>
-        AOS.init();
-    </script>
-    <script>
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.glass-box.reveal');
+            const winHeight = window.innerHeight;
+            reveals.forEach(function(el) {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < winHeight-60) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('DOMContentLoaded', function() {
+            revealOnScroll();
+        });
+
+        // Navbar mobile menu
         function toggleMenu() {
             const menu = document.getElementById('menu');
             const menuToggle = document.getElementById('menuToggle');
