@@ -10,267 +10,246 @@
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     <style>
-      body {
-        font-family: 'Vazirmatn', 'Inter', sans-serif;
-        min-height: 100vh;
-        overflow-x: hidden;
-        position: relative;
-        background: linear-gradient(-45deg, #0f2027, #2c5364, #0fffc0, #ff0040);
-        background-size: 400% 400%;
-        animation: gradientBG 13s ease infinite;
-      }
-      @keyframes gradientBG {
-        0% {background-position:0% 50%;}
-        50% {background-position:100% 50%;}
-        100% {background-position:0% 50%;}
-      }
-      /* Reveal animation directions */
-      .reveal {
-        opacity: 0;
-        transition: all 0.7s cubic-bezier(.39,.58,.57,1);
-        will-change: opacity, transform;
-      }
-      .reveal.active {
-        opacity: 1;
-        transform: translate(0,0) !important;
-      }
-      .reveal-from-left    { transform: translateX(-70px);}
-      .reveal-from-right   { transform: translateX(70px);}
-      .reveal-from-top     { transform: translateY(-70px);}
-      .reveal-from-bottom  { transform: translateY(70px);}
-      /* سایر استایل‌ها */
-      #particle-canvas {
-          position: fixed;
-          top: 0; left: 0;
-          width: 100vw; height: 100vh;
-          z-index: 0;
-          pointer-events: none;
-          opacity: 0.8;
-      }
-      .main-content {
-          position: relative;
-          z-index: 1;
-      }
-      .glass-box {
-          background: rgba(30, 41, 59, 0.65);
-          border: 2px solid #0fffc0;
-          border-radius: 22px;
-          box-shadow: 0 0 32px #0fffc033;
-          backdrop-filter: blur(18px);
-          padding: 2rem 1.6rem 1.5rem 1.6rem;
-          margin-bottom: 2.3rem;
-          opacity: 0;
-          transform: translateY(80px);
-          transition: opacity 0.9s cubic-bezier(.39,.58,.57,1), transform 0.9s cubic-bezier(.39,.58,.57,1);
-          text-align: center;
-      }
-      .glass-box.visible {
-          opacity: 1;
-          transform: translateY(0);
-      }
-      .glass-title {
-          font-size: 2rem;
-          color: #0fffc0;
-          font-weight: bold;
-          margin-bottom: 1rem;
-          text-align: center;
-          letter-spacing: -.01em;
-      }
-      .neon-card {
-          background: rgba(0,0,0,0.39);
-          border: 2.5px solid #0fffc0;
-          border-radius: 18px;
-          box-shadow: 0 0 30px #0fffc070, 0 0 0 1px #222;
-          display: flex;
-          align-items: center;
-          padding: 1.15rem 1.5rem;
-          gap: 1.1rem;
-          margin: 0.5rem 0;
-          min-width: 190px;
-          min-height: 70px;
-          transition: box-shadow 0.28s, border 0.28s, transform 0.2s;
-          cursor: pointer;
-          justify-content: center;
-      }
-      .neon-card:hover {
-          border-color: #ff0040;
-          box-shadow: 0 0 30px #ff004080,0 0 0 2px #111;
-          transform: translateY(-3px) scale(1.035);
-      }
-      .neon-icon {
-          font-size: 2.05rem;
-          color: #0fffc0;
-          filter: drop-shadow(0 0 8px #0fffc0cc);
-          min-width: 38px; min-height: 38px;
-          background: #10151c;
-          border-radius: 50%;
-          display: flex; align-items: center; justify-content: center;
-      }
-      .neon-card span {
-          font-size: 1.07rem;
-          font-weight: 700;
-          color: #0fffc0;
-          letter-spacing: .01em;
-      }
-      .glass-box.details-animate {
-          transition: opacity 0.9s cubic-bezier(.39,.58,.57,1), transform 0.9s cubic-bezier(.39,.58,.57,1);
-          opacity: 0;
-          transform: translateX(-120px) scale(0.98);
-          text-align: center;
-      }
-      .glass-box.details-animate.visible {
-          opacity: 1 !important;
-          transform: translateX(0) scale(1) !important;
-      }
-      .details-black {
-          color: #181818;
-          font-size: 1.07rem;
-          font-weight: 500;
-          text-align: center;
-      }
-      .section-label {
-          font-size: 1.45rem; font-weight: bold;
-          letter-spacing: -.02em;
-          color: #181818;
-          margin-bottom: .6rem;
-          margin-top: .7rem;
-          text-align: center;
-      }
-      .edu-cards {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1.5rem;
-          justify-content: center;
-          margin-top: 1.2rem;
-      }
-      .edu-glass-card {
-          background: rgba(30, 41, 59, 0.74);
-          border: 2px solid #0fffc0;
-          border-radius: 19px;
-          box-shadow: 0 0 19px #0fffc033;
-          backdrop-filter: blur(9px);
-          padding: 1.2rem 1rem 1rem 1rem;
-          min-width: 185px;
-          max-width: 230px;
-          min-height: 180px;
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          transition: border 0.19s, box-shadow 0.19s, transform 0.22s;
-          cursor: pointer;
-          position: relative;
-      }
-      .edu-glass-card:hover {
-          border-color: #ff0040;
-          box-shadow: 0 0 25px #ff004080,0 0 0 2px #111;
-          transform: translateY(-4px) scale(1.045);
-      }
-      .edu-glass-card img {
-          width: 55px; height: 55px;
-          border-radius: 50%;
-          margin-bottom: 1rem;
-          background: #0fffc016;
-          box-shadow: 0 0 11px #0fffc040;
-      }
-      .edu-glass-card h3 {
-          color: #0fffc0;
-          font-size: 1.09rem;
-          margin-bottom: .45rem;
-          font-weight: bold;
-      }
-      .edu-glass-card span {
-          font-size: 0.97rem;
-          color: #181818;
-      }
-      .status-flex {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1.3rem;
-          justify-content: center;
-          align-items: flex-start;
-      }
-      .status-box {
-          background: rgba(0,0,0,0.21);
-          border: 2px solid #0fffc0;
-          border-radius: 14px;
-          box-shadow: 0 0 16px #0fffc033;
-          padding: 1.2rem 2.2rem 1.2rem 2.2rem;
-          min-width: 180px;
-          margin: 0.4rem;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-      }
-      .status-label {
-          color: #0fffc0;
-          font-weight: bold;
-          font-size: 1.1rem;
-          text-align: center;
-      }
-      .status-value {
-          color: #ff0040;
-          font-size: 1.75rem;
-          font-weight: bold;
-          text-align: center;
-      }
-      .neon-nav {
-          display: flex;
-          justify-content: center;
-          gap: 2.5rem;
-          margin-top: 25px;
-          margin-bottom: 35px;
-          z-index: 2;
-          position: relative;
-          flex-wrap: wrap;
-      }
-      .neon-nav-link {
-          color: #0fffc0;
-          font-weight: bold;
-          font-size: 1.1rem;
-          text-decoration: none;
-          padding-bottom: 5px;
-          position: relative;
-          transition: color 0.22s;
-          text-align: center;
-      }
-      .neon-nav-link:hover { color: #ff0040; }
-      .neon-nav-link.active { color: #ff0040; }
-      .neon-nav-link::after {
-          content: "";
-          display: block;
-          height: 4px;
-          margin: 0 auto;
-          width: 60%;
-          border-radius: 6px;
-          background: linear-gradient(90deg,#0fffc0 0%,#181818 40%,#ff0040 100%);
-          box-shadow: 0 0 8px #0fffc0bb;
-          transition: background .3s;
-          margin-top: 5px;
-      }
-      .neon-nav-link.active::after, .neon-nav-link:hover::after {
-          background: linear-gradient(90deg,#ff0040 0%,#0fffc0 40%,#ff0040 100%) !important;
-          box-shadow: 0 0 12px #ff0040bb;
-      }
-      @media (max-width: 900px) {
-          .edu-cards { gap: 1rem; }
-          .edu-glass-card { min-width: 150px; max-width: 180px; }
-          .glass-title { font-size: 1.15rem; }
-      }
-      @media (max-width: 600px) {
-          .edu-cards { flex-direction: column; align-items: center; }
-          .neon-nav { gap: 1.1rem; }
-          .glass-box { padding: 1rem .4rem 1rem .4rem; }
-          .glass-title { font-size: 1.05rem; }
-      }
+        <link rel="stylesheet" href="animated-text.css">
+        body {
+            font-family: 'Vazirmatn', 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        #particle-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+        .main-content {
+            position: relative;
+            z-index: 1;
+        }
+        .glass-box {
+            background: rgba(30, 41, 59, 0.65);
+            border: 2px solid #0fffc0;
+            border-radius: 22px;
+            box-shadow: 0 0 32px #0fffc033;
+            backdrop-filter: blur(18px);
+            padding: 2rem 1.6rem 1.5rem 1.6rem;
+            margin-bottom: 2.3rem;
+            opacity: 0;
+            transform: translateY(80px);
+            transition: opacity 0.9s cubic-bezier(.39,.58,.57,1), transform 0.9s cubic-bezier(.39,.58,.57,1);
+            text-align: center;
+        }
+        .glass-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .glass-title {
+            font-size: 2rem;
+            color: #0fffc0;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-align: center;
+            letter-spacing: -.01em;
+        }
+        .neon-card {
+            background: rgba(0,0,0,0.39);
+            border: 2.5px solid #0fffc0;
+            border-radius: 18px;
+            box-shadow: 0 0 30px #0fffc070, 0 0 0 1px #222;
+            display: flex;
+            align-items: center;
+            padding: 1.15rem 1.5rem;
+            gap: 1.1rem;
+            margin: 0.5rem 0;
+            min-width: 190px;
+            min-height: 70px;
+            transition: box-shadow 0.28s, border 0.28s, transform 0.2s;
+            cursor: pointer;
+            justify-content: center;
+        }
+        .neon-card:hover {
+            border-color: #ff0040;
+            box-shadow: 0 0 30px #ff004080,0 0 0 2px #111;
+            transform: translateY(-3px) scale(1.035);
+        }
+        .neon-icon {
+            font-size: 2.05rem;
+            color: #0fffc0;
+            filter: drop-shadow(0 0 8px #0fffc0cc);
+            min-width: 38px; min-height: 38px;
+            background: #10151c;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .neon-card span {
+            font-size: 1.07rem;
+            font-weight: 700;
+            color: #0fffc0;
+            letter-spacing: .01em;
+        }
+        .glass-box.details-animate {
+            transition: opacity 0.9s cubic-bezier(.39,.58,.57,1), transform 0.9s cubic-bezier(.39,.58,.57,1);
+            opacity: 0;
+            transform: translateX(-120px) scale(0.98);
+            text-align: center;
+        }
+        .glass-box.details-animate.visible {
+            opacity: 1 !important;
+            transform: translateX(0) scale(1) !important;
+        }
+        .details-black {
+            color: #181818;
+            font-size: 1.07rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        .section-label {
+            font-size: 1.45rem; font-weight: bold;
+            letter-spacing: -.02em;
+            color: #181818;
+            margin-bottom: .6rem;
+            margin-top: .7rem;
+            text-align: center;
+        }
+        .edu-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 1.2rem;
+        }
+        .edu-glass-card {
+            background: rgba(30, 41, 59, 0.74);
+            border: 2px solid #0fffc0;
+            border-radius: 19px;
+            box-shadow: 0 0 19px #0fffc033;
+            backdrop-filter: blur(9px);
+            padding: 1.2rem 1rem 1rem 1rem;
+            min-width: 185px;
+            max-width: 230px;
+            min-height: 180px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: border 0.19s, box-shadow 0.19s, transform 0.22s;
+            cursor: pointer;
+            position: relative;
+        }
+        .edu-glass-card:hover {
+            border-color: #ff0040;
+            box-shadow: 0 0 25px #ff004080,0 0 0 2px #111;
+            transform: translateY(-4px) scale(1.045);
+        }
+        .edu-glass-card img {
+            width: 55px; height: 55px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            background: #0fffc016;
+            box-shadow: 0 0 11px #0fffc040;
+        }
+        .edu-glass-card h3 {
+            color: #0fffc0;
+            font-size: 1.09rem;
+            margin-bottom: .45rem;
+            font-weight: bold;
+        }
+        .edu-glass-card span {
+            font-size: 0.97rem;
+            color: #181818;
+        }
+        .status-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.3rem;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .status-box {
+            background: rgba(0,0,0,0.21);
+            border: 2px solid #0fffc0;
+            border-radius: 14px;
+            box-shadow: 0 0 16px #0fffc033;
+            padding: 1.2rem 2.2rem 1.2rem 2.2rem;
+            min-width: 180px;
+            margin: 0.4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .status-label {
+            color: #0fffc0;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        .status-value {
+            color: #ff0040;
+            font-size: 1.75rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        .neon-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 25px;
+            margin-bottom: 35px;
+            z-index: 2;
+            position: relative;
+            flex-wrap: wrap;
+        }
+        .neon-nav-link {
+            color: #0fffc0;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-decoration: none;
+            padding-bottom: 5px;
+            position: relative;
+            transition: color 0.22s;
+            text-align: center;
+        }
+        .neon-nav-link:hover { color: #ff0040; }
+        .neon-nav-link.active { color: #ff0040; }
+        .neon-nav-link::after {
+            content: "";
+            display: block;
+            height: 4px;
+            margin: 0 auto;
+            width: 60%;
+            border-radius: 6px;
+            background: linear-gradient(90deg,#0fffc0 0%,#181818 40%,#ff0040 100%);
+            box-shadow: 0 0 8px #0fffc0bb;
+            transition: background .3s;
+            margin-top: 5px;
+        }
+        .neon-nav-link.active::after, .neon-nav-link:hover::after {
+            background: linear-gradient(90deg,#ff0040 0%,#0fffc0 40%,#ff0040 100%) !important;
+            box-shadow: 0 0 12px #ff0040bb;
+        }
+        @media (max-width: 900px) {
+            .edu-cards { gap: 1rem; }
+            .edu-glass-card { min-width: 150px; max-width: 180px; }
+            .glass-title { font-size: 1.15rem; }
+        }
+        @media (max-width: 600px) {
+            .edu-cards { flex-direction: column; align-items: center; }
+            .neon-nav { gap: 1.1rem; }
+            .glass-box { padding: 1rem .4rem 1rem .4rem; }
+            .glass-title { font-size: 1.05rem; }
+        }
     </style>
 </head>
 <body>
 <canvas id="particle-canvas"></canvas>
 <div class="main-content container mx-auto px-2 py-8" style="margin-top:30px;max-width:1000px;">
     <!-- Navigation (Neon tabs) -->
-    <nav class="neon-nav reveal">
+    <nav class="neon-nav">
         <a href="index.html" class="neon-nav-link active">خانه</a>
         <a href="Attachments/index.html" class="neon-nav-link">اتچمنت‌ها</a>
         <a href="BetterPing/index.html" class="neon-nav-link">رفع تحریم‌ها</a>
@@ -278,13 +257,13 @@
     </nav>
 
     <!-- سایت و شعار -->
-    <div class="glass-box reveal" style="text-align:center; margin-bottom:1.1rem;">
-        <div class="glass-title">bloodstrikefarsi-web</div>
+    <div class="glass-box visible" style="text-align:center; margin-bottom:1.1rem;">
+        <div class="glass-title" style="font-size:2.2rem; margin-bottom:0.45rem;">bloodstrikefarsi-web</div>
         <div style="font-size:1.16rem; color:#111; font-weight:600;">سایت آموزشات بلاد استرایک فارسی</div>
     </div>
 
     <!-- شبکه‌های اجتماعی -->
-    <div class="flex flex-wrap justify-center gap-5 mb-8 reveal">
+    <div class="flex flex-wrap justify-center gap-5 mb-8">
         <a href="https://t.me/BloodStrikeFarsi" target="_blank" class="neon-card">
             <span class="neon-icon" style="background:#0088cc1e;"><i class="fab fa-telegram"></i></span>
             <span>چنل تلگرام</span>
@@ -313,29 +292,32 @@
     <div class="glass-box details-animate reveal" id="comm-details">
         <div class="section-label" style="color:#0fffc0;">درباره کامیونیتی ما</div>
         <div class="details-black" style="font-size:1.08rem;">
-            بلاد استرایک فارسی اولین و بزرگ‌ترین کامیونیتی بلاد استرایک در ایران است که فعالیت خودش رو از ۲ تیر ۱۴۰[...]
-            تا کنون در شبکه‌های اجتماعی زیادی فعالیت داشته. همین حالا به ما بپیوندید تا از آخرین اخبار و جزئیات گیم�[...]
+            بلاد استرایک فارسی اولین و بزرگ‌ترین کامیونیتی بلاد استرایک در ایران است که فعالیت خودش رو از ۲ تیر ۱۴۰۲ آغاز کرده.<br>
+            تا کنون در شبکه‌های اجتماعی زیادی فعالیت داشته. همین حالا به ما بپیوندید تا از آخرین اخبار و جزئیات گیم، کاستوم روم‌ها و بیشتر باخبر بشید.
         </div>
     </div>
-
     <!-- آموزش‌ها -->
-    <div class="glass-title reveal" style="font-size:1.7rem; color:#0fffc0; margin-bottom:0.2rem;">بخش آموزش‌ها</div>
-    <div class="edu-cards reveal">
+    <div class="glass-title" style="font-size:1.7rem; color:#0fffc0; margin-bottom:0.2rem;">بخش آموزش‌ها</div>
+    <div class="edu-cards">
+        <!-- خرید گلد بازی -->
         <a href="BuyGold/index.html" class="edu-glass-card">
             <img src="images/gold.webp" alt="خرید گلد بازی">
             <h3>خرید گلد بازی</h3>
             <span>آموزش کامل خرید گلد و آیتم‌ها</span>
         </a>
+        <!-- لیست اتچمنت‌ها -->
         <a href="Attachments/index.html" class="edu-glass-card">
             <img src="images/attachments.webp" alt="لیست اتچمنت‌ها">
             <h3>لیست اتچمنت‌ها</h3>
             <span>راهنمای جامع اتچمنت‌های بازی</span>
         </a>
+        <!-- رفع تحریم ها -->
         <a href="BetterPing/index.html" class="edu-glass-card">
             <img src="images/lagslayericon.webp" alt="رفع تحریم‌ها">
             <h3>رفع تحریم‌ها</h3>
             <span>روش‌های جدید رفع تحریم و کاهش پینگ</span>
         </a>
+        <!-- کل آموزش ها -->
         <a href="Tutorials/index.html" class="edu-glass-card">
             <img src="images/tutorials.png" alt="کل آموزش‌ها">
             <h3>کل آموزش‌ها</h3>
@@ -358,9 +340,9 @@
         </div>
     </div>
 </div>
-<footer class="text-center mt-16 py-8 border-t border-slate-700 reveal" style="z-index:10;position:relative;">
+<footer class="text-center mt-16 py-8 border-t border-slate-700" style="z-index:10;position:relative;">
     <p style="direction: ltr;" class="text-slate-400">&copy; 2025 bloodstrikefarsi-web. All rights reserved.</p>
-    <p class="text-slate-500 text-sm mt-1">Designed with ♥ And HTML, CSS, JS , @BloodStrike-Farsi</p>
+    <p class="text-slate-500 text-sm mt-1">Designed with ♥️ And HTML, CSS, JS , @BloodStrike-Farsi</p>
 </footer>
 <!-- Particle background script -->
 <script>
@@ -388,8 +370,8 @@
             ctx.fill();
         }
         update() {
-            if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-            if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+            if (this.x > canvas.width  this.x < 0) this.directionX = -this.directionX;
+            if (this.y > canvas.height  this.y < 0) this.directionY = -this.directionY;
             this.x += this.directionX;
             this.y += this.directionY;
             this.draw();
@@ -427,14 +409,14 @@
         let opacityValue = 1;
         for (let a = 0; a < particlesArray.length; a++) {
             for (let b = a; b < particlesArray.length; b++) {
-                let distance = ((particlesArray[a].x - particlesArray[b].x) ** 2)
-                             + ((particlesArray[a].y - particlesArray[b].y) ** 2);
+                let distance = ((particlesArray[a].x - particlesArray[b].x)  2)
+                             + ((particlesArray[a].y - particlesArray[b].y)  2);
                 let connectDistance = (canvas.width/10) * (canvas.height/10) / 50;
                 connectDistance = Math.min(connectDistance, 120*120);
                 connectDistance = Math.max(connectDistance, 70*70);
                 if (distance < connectDistance) {
                     opacityValue = 1 - (distance / (connectDistance * 1.1));
-                    let lineColor = particlesArray[a].color.replace(/[\d\.]+\)$/g, `${Math.max(0, opacityValue - 0.3)})`);
+                    let lineColor = particlesArray[a].color.replace(/[\d\.]+\)$/g, ${Math.max(0, opacityValue - 0.3)}));
                     ctx.strokeStyle = lineColor;
                     ctx.lineWidth = 0.5;
                     ctx.beginPath();
@@ -453,34 +435,28 @@
     animateParticles();
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // به هر .reveal یک جهت تصادفی بده (اگر از قبل نداره)
-    const directions = ['reveal-from-left', 'reveal-from-right', 'reveal-from-top', 'reveal-from-bottom'];
-    document.querySelectorAll('.reveal').forEach(el => {
-        if(!el.classList.contains('reveal-from-left') &&
-           !el.classList.contains('reveal-from-right') &&
-           !el.classList.contains('reveal-from-top') &&
-           !el.classList.contains('reveal-from-bottom')) {
-             el.classList.add(directions[Math.floor(Math.random()*directions.length)]);
-        }
-    });
     function revealOnScroll() {
-        document.querySelectorAll('.reveal').forEach(el => {
+        const reveals = document.querySelectorAll('.glass-box.reveal');
+        const winHeight = window.innerHeight;
+        reveals.forEach(function(el) {
             const rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight - 70 && rect.bottom > 70) {
-                el.classList.add('active');
-            } else {
-                el.classList.remove('active');
+            if (rect.top < winHeight-60) {
+                el.classList.add('visible');
+            }
+        });
+        // جزئیات کلی سایت و کامیونیتی: پرتابی
+        const specialAnims = document.querySelectorAll('.glass-box.details-animate');
+        specialAnims.forEach(function(el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < winHeight-60) {
+                el.classList.add('visible');
             }
         });
     }
     window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll();
-});
-</script>
-<script>
-    // Neon nav active highlight
-    function revealNavHighlight() {
+    window.addEventListener('DOMContentLoaded', function() {
+        revealOnScroll();
+        // Neon nav active highlight
         const links = document.querySelectorAll(".neon-nav-link");
         const currentPath = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
         links.forEach(link => {
@@ -489,8 +465,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 link.classList.add("active");
             }
         });
-    }
-    window.addEventListener('DOMContentLoaded', revealNavHighlight);
+    });
 </script>
 </body>
 </html>
