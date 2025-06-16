@@ -1,0 +1,14 @@
+@keyframes fadeInUpText {
+  from {
+    opacity: 0;
+    transform: translateY(34px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animated-text {
+  opacity: 0;
+  animation: fadeInUpText 1s cubic-bezier(.39,.58,.57,1) forwards;
+}
